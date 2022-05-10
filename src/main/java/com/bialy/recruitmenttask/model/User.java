@@ -5,9 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,4 +18,8 @@ public class User {
     private long id;
     private String email;
     private String login;
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Registration> registrations;
 }
