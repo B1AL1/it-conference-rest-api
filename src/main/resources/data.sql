@@ -2,7 +2,7 @@ INSERT INTO USER(id, email, login) VALUES (1, 'test1@test.pl', 'Janusz');
 INSERT INTO USER(id, email, login) VALUES (2, 'test2@test.pl', 'Tomasz');
 INSERT INTO USER(id, email, login) VALUES (3, 'test3@test.pl', 'Jacek');
 
-INSERT INTO REGISTRATION(id, user_id, lecture_id, created) VALUES (1, 1, 1, localtimestamp());
+INSERT INTO REGISTRATION(id, user_id, lecture_id, created) VALUES (1, 1, 1, DATEADD(HOUR, 9, DATE '2021-06-01'));
 INSERT INTO REGISTRATION(id, user_id, lecture_id, created) VALUES (2, 1, 1, localtimestamp());
 INSERT INTO REGISTRATION(id, user_id, lecture_id, created) VALUES (3, 1, 1, localtimestamp());
 INSERT INTO REGISTRATION(id, user_id, lecture_id, created) VALUES (4, 1, 1, localtimestamp());
