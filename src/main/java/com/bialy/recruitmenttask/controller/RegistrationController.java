@@ -16,7 +16,7 @@ public class RegistrationController {
 
     private final RegistrationService registrationService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<Registration> getRegistrations() { return registrationService.getRegistrations();}
 
 }

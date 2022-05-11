@@ -9,15 +9,15 @@ INSERT INTO USER(id, email, login) VALUES (8, 'test8@test.pl', 'Test8');
 INSERT INTO USER(id, email, login) VALUES (9, 'test9@test.pl', 'Test9');
 INSERT INTO USER(id, email, login) VALUES (10, 'test10@test.pl', 'Test10');
 
-INSERT INTO LECTURE(id, title, starting) VALUES (1, 'V is for Visibility: The Essential Cybersecurity Ingredient in a VUCA World.', {ts '2021-06-01 10:00:00.00'});
-INSERT INTO LECTURE(id, title, starting) VALUES (2, 'Cybersecurity First Principles.', {ts '2021-06-01 12:00:00.00'});
-INSERT INTO LECTURE(id, title, starting) VALUES (3, 'Human Security Engineering: Stop Relying on the Failed Human Firewall.', {ts '2021-06-01 14:00:00.00'});
-INSERT INTO LECTURE(id, title, starting) VALUES (4, 'Crouching Hacker, Killer Robot? Removing FUD from Cyber-physical Security.', {ts '2021-06-01 10:00:00.00'});
-INSERT INTO LECTURE(id, title, starting) VALUES (5, 'Jak rozmawiać o cyberbezpieczeństwie z CEO?', {ts '2021-06-01 12:00:00.00'});
-INSERT INTO LECTURE(id, title, starting) VALUES (6, 'Czy z Twojej strony XS-wyciekają wrażliwe dane?', {ts '2021-06-01 14:00:00.00'});
-INSERT INTO LECTURE(id, title, starting) VALUES (7, 'Jak przestępcy wykorzystują technologię do kradzieży pieniędzy w oszustwie tzw. "fałszywych inwestycji".', {ts '2021-06-01 10:00:00.00'});
-INSERT INTO LECTURE(id, title, starting) VALUES (8, 'Dziś i jutro e-commerce – jakie trendy zyskują na popularności i znaczeniu?', {ts '2021-06-01 12:00:00.00'});
-INSERT INTO LECTURE(id, title, starting) VALUES (9, '2021 rokiem zakupów online, ale czy do sukcesu wciąż wystarczy tylko sam sklep?', {ts '2021-06-01 14:00:00.00'});
+INSERT INTO LECTURE(id, title, starting, ending) VALUES (1, 'V is for Visibility: The Essential Cybersecurity Ingredient in a VUCA World.', {ts '2021-06-01 10:00:00.00'}, {ts '2021-06-01 11:45:00.00'});
+INSERT INTO LECTURE(id, title, starting, ending) VALUES (2, 'Cybersecurity First Principles.', {ts '2021-06-01 12:00:00.00'}, {ts '2021-06-01 13:45:00.00'});
+INSERT INTO LECTURE(id, title, starting, ending) VALUES (3, 'Human Security Engineering: Stop Relying on the Failed Human Firewall.', {ts '2021-06-01 14:00:00.00'}, {ts '2021-06-01 15:45:00.00'});
+INSERT INTO LECTURE(id, title, starting, ending) VALUES (4, 'Crouching Hacker, Killer Robot? Removing FUD from Cyber-physical Security.', {ts '2021-06-01 10:00:00.00', {ts '2021-06-01 11:45:00.00'}});
+INSERT INTO LECTURE(id, title, starting, ending) VALUES (5, 'Jak rozmawiać o cyberbezpieczeństwie z CEO?', {ts '2021-06-01 12:00:00.00'}, {ts '2021-06-01 13:45:00.00'});
+INSERT INTO LECTURE(id, title, starting, ending) VALUES (6, 'Czy z Twojej strony XS-wyciekają wrażliwe dane?', {ts '2021-06-01 14:00:00.00'}, {ts '2021-06-01 15:45:00.00'});
+INSERT INTO LECTURE(id, title, starting, ending) VALUES (7, 'Jak przestępcy wykorzystują technologię do kradzieży pieniędzy w oszustwie tzw. "fałszywych inwestycji".', {ts '2021-06-01 10:00:00.00'}, {ts '2021-06-01 11:45:00.00'});
+INSERT INTO LECTURE(id, title, starting, ending) VALUES (8, 'Dziś i jutro e-commerce – jakie trendy zyskują na popularności i znaczeniu?', {ts '2021-06-01 12:00:00.00'}, {ts '2021-06-01 13:45:00.00'});
+INSERT INTO LECTURE(id, title, starting, ending) VALUES (9, '2021 rokiem zakupów online, ale czy do sukcesu wciąż wystarczy tylko sam sklep?', {ts '2021-06-01 14:00:00.00'}, {ts '2021-06-01 15:45:00.00'});
 
 INSERT INTO REGISTRATION(id, user_id, lecture_id, created) VALUES (1, 1, 1, localtimestamp()-365);
 INSERT INTO REGISTRATION(id, user_id, lecture_id, created) VALUES (2, 1, 5, localtimestamp()-365);

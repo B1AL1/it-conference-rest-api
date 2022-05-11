@@ -20,4 +20,18 @@ public class UserService {
     public User getUser(long id) {
         return userRepository.findById(id).orElseThrow();
     }
+
+    public boolean addUserIfNotExists(User user) {
+        boolean exists = userRepository.findUserByLogin(user.getLogin());
+        if(exists)
+            throw new IllegalStateException("Podany login jest już zajęty");
+        else {
+            userRepository.save(user);
+            return true;
+        }
+    }
+
+    public void addNewUser(User user) {
+        userRepository.save(user);
+    }
 }

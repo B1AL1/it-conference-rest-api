@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Registration {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private long user_id;
     private long lecture_id;

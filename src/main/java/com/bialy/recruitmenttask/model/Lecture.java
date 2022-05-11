@@ -19,9 +19,11 @@ import java.util.List;
 @Entity
 public class Lecture {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
     private LocalDateTime starting;
+    private LocalDateTime ending;
 
     @OneToMany
     @JoinColumn(name = "lecture_id")
