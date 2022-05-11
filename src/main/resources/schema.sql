@@ -11,6 +11,16 @@ CREATE TABLE REGISTRATION (
     created TIMESTAMP
 );
 
+CREATE TABLE LECTURE (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    starting TIMESTAMP
+);
+
 ALTER TABLE REGISTRATION
     ADD CONSTRAINT registration_user_id
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    FOREIGN KEY (user_id) REFERENCES user(id);
+
+ALTER TABLE REGISTRATION
+    ADD CONSTRAINT registration_lecture_id
+    FOREIGN KEY (lecture_id) REFERENCES lecture(id);
