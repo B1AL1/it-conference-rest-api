@@ -20,8 +20,4 @@ public class LectureSevice {
     public List<Lecture> getUserLectures(String login) {
         return lectureRepository.findAllLecturesByUserLogin(login);
     }
-
-    public Lecture addLecture(Lecture lecture) {
-        return lectureRepository.save(lecture);
-    }
 }
