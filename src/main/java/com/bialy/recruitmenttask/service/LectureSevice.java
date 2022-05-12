@@ -1,7 +1,6 @@
 package com.bialy.recruitmenttask.service;
 
 import com.bialy.recruitmenttask.model.Lecture;
-import com.bialy.recruitmenttask.model.User;
 import com.bialy.recruitmenttask.repository.LectureRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,5 +19,9 @@ public class LectureSevice {
 
     public List<Lecture> getUserLectures(String login) {
         return lectureRepository.findAllLecturesByUserLogin(login);
+    }
+
+    public Lecture addLecture(Lecture lecture) {
+        return lectureRepository.save(lecture);
     }
 }

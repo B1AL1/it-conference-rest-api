@@ -2,11 +2,10 @@ package com.bialy.recruitmenttask.controller;
 
 import com.bialy.recruitmenttask.model.Lecture;
 import com.bialy.recruitmenttask.model.LectureDto;
+import com.bialy.recruitmenttask.model.User;
 import com.bialy.recruitmenttask.service.LectureSevice;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,12 @@ public class LectureController {
     private final LectureSevice lectureSevice;
 
     @GetMapping
-    public List<LectureDto> getLectures() { return mapToLectureDtos(lectureSevice.getLectures()); }
+    public List<LectureDto> getLectures() {
+        return mapToLectureDtos(lectureSevice.getLectures());
+    }
+
+    @PostMapping
+    public Lecture addLecture(@RequestBody Lecture lecture) {
+        return lectureSevice.addLecture(lecture);
+    }
 }

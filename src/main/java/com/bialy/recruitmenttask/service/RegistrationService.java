@@ -1,6 +1,8 @@
 package com.bialy.recruitmenttask.service;
 
+import com.bialy.recruitmenttask.model.Lecture;
 import com.bialy.recruitmenttask.model.Registration;
+import com.bialy.recruitmenttask.model.User;
 import com.bialy.recruitmenttask.repository.RegistrationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,5 +21,9 @@ public class RegistrationService {
 
     public Registration saveRegistration(Registration registration) {
         return registrationRepository.save(registration);
+    }
+
+    public Registration addRegistration(Registration registration) {
+        throw new IllegalArgumentException("NOT IMPLEMENTED");
     }
 }

@@ -17,12 +17,12 @@ import java.util.List;
 @Table
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String email;
     private String login;
 
     @OneToMany
-    @JoinColumn(name = "user_id")
-    private List<Registration> registrations;
+    @JoinColumn(name = "user_id", updatable = false, insertable = false)
+    private List<Registration> registration;
 }

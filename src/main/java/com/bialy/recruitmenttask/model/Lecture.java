@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,13 +20,14 @@ import java.util.List;
 @Entity
 public class Lecture {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
     private LocalDateTime starting;
     private LocalDateTime ending;
+    private final int max_amount_of_users = 5;
 
     @OneToMany
-    @JoinColumn(name = "lecture_id")
+    @JoinColumn(name = "lecture_id", updatable = false, insertable = false)
     private List<Registration> registrations;
 }

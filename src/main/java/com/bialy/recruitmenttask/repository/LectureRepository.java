@@ -15,4 +15,6 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
             "inner join User u on u.id = r.user_id where login = ?1")
     List<Lecture> findAllLecturesByUserLogin(String login);
 
+    @Query("select l from Lecture l where user_id = ?1")
+    boolean findAllByUserId(long id);
 }

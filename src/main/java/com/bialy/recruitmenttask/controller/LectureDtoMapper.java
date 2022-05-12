@@ -2,8 +2,6 @@ package com.bialy.recruitmenttask.controller;
 
 import com.bialy.recruitmenttask.model.Lecture;
 import com.bialy.recruitmenttask.model.LectureDto;
-import com.bialy.recruitmenttask.model.User;
-import com.bialy.recruitmenttask.model.UserDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
