@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.OptionalLong;
 
 @Repository
 public interface LectureRepository extends JpaRepository<Lecture, Long> {
@@ -16,5 +18,7 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
     List<Lecture> findAllLecturesByUserLogin(String login);
 
     @Query("select l from Lecture l where user_id = ?1")
-    boolean findAllByUserId(long id);
+    boolean findByUserId(long id);
+
+    List<Lecture> findAllById(Long lecture_id);
 }

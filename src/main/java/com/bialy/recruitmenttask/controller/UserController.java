@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @PostMapping("/{login}/{email}")
-    public Registration registerUserToLecture(@PathVariable String login, @PathVariable String email) {
-        return userService.registerUserToLecture(login, email);
+    public Registration registerUserToLecture(@PathVariable String login, @PathVariable String email, @RequestBody Registration registration) {
+        return userService.registerUserToLecture(login, email, registration);
     }
 }

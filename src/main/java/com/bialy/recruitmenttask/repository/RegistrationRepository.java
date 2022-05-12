@@ -8,4 +8,5 @@ import java.util.List;
 
 @Repository
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
+    Long findAllById(long lecture_id);
 }
