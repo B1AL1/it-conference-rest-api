@@ -91,7 +91,7 @@ public class UserService {
                     newRegistration.setUser_id(exists.getId());
 
                     String str = "Data wysłania: " + LocalDateTime.now()
-                            + "\nDo: " + exists.getLogin()
+                            + "\nDo: " + exists.getEmail()
                             + "\nTreść: Zapisano na przelekcję: " + lecture.getTitle();
 
                     try {
@@ -111,7 +111,7 @@ public class UserService {
                 newRegistration.setUser_id(newUser.getId());
 
                 String str = "Data wysłania: " + LocalDateTime.now()
-                        + "\nDo: " + newUser.getLogin()
+                        + "\nDo: " + newUser.getEmail()
                         + "\nTreść: Zapisano na przelekcję: " + lecture.getTitle();
 
                 try {
