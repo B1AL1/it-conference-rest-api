@@ -18,4 +18,6 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
     @Query("select r from Registration r where user_id = ?1")
     List<Registration> findAllByUser_id(long id);
 
+    @Query("select r from Registration r where user_id = ?1 and lecture_id = ?2")
+    Registration findAllByUser_idAndLecture_id(long user_id, long lecture_id);
 }

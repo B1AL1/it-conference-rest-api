@@ -58,4 +58,10 @@ public class UserController {
     {
         return userService.updateEmail(id, email);
     }
+
+    @DeleteMapping("/registrations/{user_id}")
+    public void deleteRegistration(@PathVariable long user_id, @RequestParam long lecture_id)
+    {
+        userService.deleteRegistartion(user_id, lecture_id);
+    }
 }

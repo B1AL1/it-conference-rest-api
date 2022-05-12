@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 @RequiredArgsConstructor
@@ -107,5 +107,22 @@ public class UserService {
         }
 
         throw new IllegalArgumentException("Podano błędny email");
+    }
+
+    public void deleteRegistartion(long user_id, long lecture_id) {
+        User user = userRepository.findById(user_id).orElseThrow(() -> new IllegalStateException("Użytkownik o id: "+ user_id +" nie istnieje"));
+        Registration registration = registrationRepository.findAllByUser_idAndLecture_id(user_id, lecture_id);
+
+        if(registration == null)
+        {
+            throw new IllegalArgumentException("Użytkownik nie jest zapisany na tą prelekcje");
+        }
+
+        if(registration.getLecture_id() == lecture_id && registration.getUser_id() == user_id)
+        {
+            registrationRepository.delete(registration);
+        }
+
+
     }
 }

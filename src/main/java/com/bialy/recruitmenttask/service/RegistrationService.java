@@ -13,4 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 public class RegistrationService {
 
-    private final RegistrationRepository registrationRepository;}
+    private final RegistrationRepository registrationRepository;
+
+}
