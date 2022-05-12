@@ -7,6 +7,7 @@ import com.bialy.recruitmenttask.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 import static com.bialy.recruitmenttask.controller.LectureDtoMapper.mapToLectureDto;
@@ -49,7 +50,7 @@ public class UserController {
     }
 
     @PostMapping("/{login}/{email}")
-    public Registration registerUserToLecture(@PathVariable String login, @PathVariable String email, @RequestBody Registration registration) {
+    public Registration registerUserToLecture(@PathVariable String login, @PathVariable String email, @RequestBody Registration registration) throws IOException {
         return userService.registerUserToLecture(login, email, registration);
     }
 

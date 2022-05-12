@@ -9,6 +9,12 @@ import com.bialy.recruitmenttask.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -38,7 +44,7 @@ public class UserService {
         return userRepository.findById(id).orElseThrow();
     }
 
-    public Registration registerUserToLecture(String login, String email, Registration registration) {
+    public Registration registerUserToLecture(String login, String email, Registration registration) throws IOException {
         List<Registration> ids = registrationRepository.findAllByLecture_id(registration.getLecture_id());
 
         Lecture lecture = lectureRepository.findById(registration.getLecture_id()).orElseThrow();
@@ -51,6 +57,13 @@ public class UserService {
         Registration newRegistration = new Registration();
         newRegistration.setLecture_id(registration.getLecture_id());
         newRegistration.setCreated(registration.getCreated());
+
+        String filePath = "src/main/resources/emailmessage.txt";
+        File file = new File(filePath);
+        file.createNewFile();
+
+        PrintWriter writer = null;
+
 
         if(ids.stream().count()<lecture.getMax_amount_of_users())
         {
@@ -76,6 +89,19 @@ public class UserService {
                     });
 
                     newRegistration.setUser_id(exists.getId());
+
+                    String str = "Data wysłania: " + LocalDateTime.now()
+                            + "\nDo: " + exists.getLogin()
+                            + "\nTreść: Zapisano na przelekcję: " + lecture.getTitle();
+
+                    try {
+                        writer = new PrintWriter(file);
+                        writer.print(str);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    writer.close();
+
                     return registrationRepository.save(newRegistration);
                 }
             }
@@ -83,6 +109,19 @@ public class UserService {
                 userRepository.save(user);
                 User newUser = userRepository.findUserByLogin(user.getLogin());
                 newRegistration.setUser_id(newUser.getId());
+
+                String str = "Data wysłania: " + LocalDateTime.now()
+                        + "\nDo: " + newUser.getLogin()
+                        + "\nTreść: Zapisano na przelekcję: " + lecture.getTitle();
+
+                try {
+                    writer = new PrintWriter(file);
+                    writer.print(str);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                writer.close();
+
                 return registrationRepository.save(newRegistration);
             }
         }
