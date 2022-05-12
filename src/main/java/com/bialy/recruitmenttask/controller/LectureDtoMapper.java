@@ -22,6 +22,7 @@ public class LectureDtoMapper {
                 .title(lecture.getTitle())
                 .starting(lecture.getStarting())
                 .ending(lecture.getEnding())
+                .thematic_path(lecture.getThematic_path())
                 .build();
     }
 

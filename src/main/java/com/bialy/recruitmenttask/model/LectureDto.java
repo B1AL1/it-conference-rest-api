@@ -12,4 +12,6 @@ public class LectureDto {
     private String title;
     private LocalDateTime starting;
     private LocalDateTime ending;
+    private final int max_amount_of_users = 5;
+    private int thematic_path;
 }

@@ -26,6 +26,7 @@ public class Lecture {
     private LocalDateTime starting;
     private LocalDateTime ending;
     private final int max_amount_of_users = 5;
+    private int thematic_path;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "lecture_id", updatable = false, insertable = false)

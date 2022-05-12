@@ -5,9 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.OptionalLong;
+import java.util.Set;
 
 @Repository
 public interface LectureRepository extends JpaRepository<Lecture, Long> {
@@ -21,4 +20,7 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
     boolean findByUserId(long id);
 
     List<Lecture> findAllById(Long lecture_id);
+
+    @Query("select l.thematic_path from Lecture l")
+    Set<Integer> findAllByThematic_path();
 }

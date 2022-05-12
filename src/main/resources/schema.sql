@@ -16,7 +16,8 @@ CREATE TABLE LECTURE (
     title VARCHAR(255) NOT NULL,
     starting TIMESTAMP NOT NULL,
     ending TIMESTAMP NOT NULL,
-    max_amount_of_users INT NOT NULL
+    max_amount_of_users INT NOT NULL,
+    thematic_path INT NOT NULL
 );
 
 ALTER TABLE REGISTRATION

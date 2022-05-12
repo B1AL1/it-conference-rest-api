@@ -23,4 +23,14 @@ public class LectureController {
         return mapToLecturesDto(lectureSevice.getLectures());
     }
 
+    @GetMapping("/statistic/all")
+    public List<Double> getPercentageParticipatationRate() {
+        return lectureSevice.getPercentageParticipationRate();
+    }
+
+    @GetMapping("/statistic/path")
+    public List<Double> getPercentageParticipatationRateInPath() {
+        return lectureSevice.getPercentageParticipationRateInPath();
+    }
+
 }
