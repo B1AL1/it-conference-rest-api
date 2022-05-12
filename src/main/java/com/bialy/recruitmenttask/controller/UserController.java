@@ -52,4 +52,10 @@ public class UserController {
     public Registration registerUserToLecture(@PathVariable String login, @PathVariable String email, @RequestBody Registration registration) {
         return userService.registerUserToLecture(login, email, registration);
     }
+
+    @PutMapping("/{id}")
+    public User updateEmail(@PathVariable long id, @RequestParam String email)
+    {
+        return userService.updateEmail(id, email);
+    }
 }

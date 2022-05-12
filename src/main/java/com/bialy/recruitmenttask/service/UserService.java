@@ -7,11 +7,10 @@ import com.bialy.recruitmenttask.repository.LectureRepository;
 import com.bialy.recruitmenttask.repository.RegistrationRepository;
 import com.bialy.recruitmenttask.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -91,5 +90,22 @@ public class UserService {
         {
             throw new IllegalArgumentException("Brak miejsc na wykład");
         }
+    }
+
+    public User updateEmail(long id, String email) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException("Użytkownik o id: "+ id +" nie istnieje"));
+        List<User> users = userRepository.findAll();
+        if(email != null && email.length() > 0 && !user.getEmail().equals(email)) {
+            users.forEach(user1 -> {
+                if(user1.getEmail().equals(email))
+                {
+                    throw new IllegalArgumentException("Podany email jest zajęty");
+                }
+            });
+            user.setEmail(email);
+            return userRepository.save(user);
+        }
+
+        throw new IllegalArgumentException("Podano błędny email");
     }
 }
