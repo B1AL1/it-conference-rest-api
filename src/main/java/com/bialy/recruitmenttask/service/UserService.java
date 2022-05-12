@@ -1,16 +1,10 @@
 package com.bialy.recruitmenttask.service;
 
-import com.bialy.recruitmenttask.model.Lecture;
 import com.bialy.recruitmenttask.model.User;
-import com.bialy.recruitmenttask.model.Registration;
-import com.bialy.recruitmenttask.repository.LectureRepository;
-import com.bialy.recruitmenttask.repository.RegistrationRepository;
 import com.bialy.recruitmenttask.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -18,8 +12,6 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final LectureRepository lectureRepository;
-    private final RegistrationRepository registrationRepository;
 
     //TODO take care of N + 1 problem
 

@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 

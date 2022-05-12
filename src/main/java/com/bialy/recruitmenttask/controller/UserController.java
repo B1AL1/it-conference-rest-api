@@ -6,7 +6,6 @@ import com.bialy.recruitmenttask.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.bialy.recruitmenttask.controller.LectureDtoMapper.mapToLecturesDto;

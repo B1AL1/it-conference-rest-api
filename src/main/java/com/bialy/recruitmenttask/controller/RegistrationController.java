@@ -2,7 +2,6 @@ package com.bialy.recruitmenttask.controller;
 
 import com.bialy.recruitmenttask.model.Registration;
 import com.bialy.recruitmenttask.service.RegistrationService;
-import com.bialy.recruitmenttask.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
