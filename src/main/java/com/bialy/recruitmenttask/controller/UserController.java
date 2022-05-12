@@ -1,9 +1,6 @@
 package com.bialy.recruitmenttask.controller;
 
-import com.bialy.recruitmenttask.model.User;
-import com.bialy.recruitmenttask.model.Lecture;
-import com.bialy.recruitmenttask.model.Registration;
-import com.bialy.recruitmenttask.model.UserDto;
+import com.bialy.recruitmenttask.model.*;
 import com.bialy.recruitmenttask.service.LectureSevice;
 import com.bialy.recruitmenttask.service.RegistrationService;
 import com.bialy.recruitmenttask.service.UserService;
@@ -12,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.bialy.recruitmenttask.controller.LectureDtoMapper.mapToLectureDto;
+import static com.bialy.recruitmenttask.controller.LectureDtoMapper.mapToLecturesDto;
 import static com.bialy.recruitmenttask.controller.UserDtoMapper.mapToUserDto;
 import static com.bialy.recruitmenttask.controller.UserDtoMapper.mapToUserDtos;
 
@@ -45,8 +44,8 @@ public class UserController {
     }
 
     @GetMapping("/{login}/lectures")
-    public List<Lecture> getUserLectures(@PathVariable String login){
-        return lectureSevice.getUserLectures(login);
+    public List<LectureDto> getUserLectures(@PathVariable String login){
+        return mapToLecturesDto(lectureSevice.getUserLectures(login));
     }
 
     @PostMapping("/{login}/{email}")

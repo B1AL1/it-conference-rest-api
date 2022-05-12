@@ -13,17 +13,4 @@ import java.util.List;
 @AllArgsConstructor
 public class RegistrationService {
 
-    private final RegistrationRepository registrationRepository;
-
-    public List<Registration> getRegistrations() {
-        return registrationRepository.findAll();
-    }
-
-    public Registration saveRegistration(Registration registration) {
-        return registrationRepository.save(registration);
-    }
-
-    public Registration addRegistration(Registration registration) {
-        throw new IllegalArgumentException("NOT IMPLEMENTED");
-    }
-}
+    private final RegistrationRepository registrationRepository;}

@@ -40,20 +40,49 @@ public class UserService {
     }
 
     public Registration registerUserToLecture(String login, String email, Registration registration) {
-        Long lecture_id = registrationRepository.findAllById(registration.getLecture_id());
-        List<Lecture> lectures = lectureRepository.findAllById(registration.getLecture_id());
+        List<Registration> ids = registrationRepository.findAllByLecture_id(registration.getLecture_id());
+
         User user = new User();
-        user.setEmail(email);
         user.setLogin(login);
+        user.setEmail(email);
         User exists = userRepository.findUserByLogin(user.getLogin());
-        if(lectures.stream().count()<5)
+
+        Registration newRegistration = new Registration();
+        newRegistration.setLecture_id(registration.getLecture_id());
+        newRegistration.setCreated(registration.getCreated());
+
+        if(ids.stream().count()<5)
         {
             if(!(exists == null))
-                throw new IllegalStateException("Podany login jest już zajęty");
+            {
+                if(exists.getLogin().equals(login) && !exists.getEmail().equals(email))
+                {
+                    throw new IllegalStateException("Podany login jest już zajęty");
+                }
+                else
+                {
+                    List<Registration> registrations = registrationRepository.findAllByUser_id(exists.getId());
+                    registrations.forEach(registration1 -> {
+                        if(registration1.getLecture_id() == registration.getLecture_id())
+                        {
+                            throw new IllegalArgumentException("Użytkownik jest już zapisany na tą prelekcję");
+                        }
+                    });
+
+                    newRegistration.setUser_id(exists.getId());
+                    return registrationRepository.save(newRegistration);
+                }
+            }
             else {
                 userRepository.save(user);
+                User newUser = userRepository.findUserByLogin(user.getLogin());
+                newRegistration.setUser_id(newUser.getId());
+                return registrationRepository.save(newRegistration);
             }
         }
-        throw new IllegalStateException("NOT IMPLEMENTED");
+        else
+        {
+            throw new IllegalArgumentException("Brak miejsc na wykład");
+        }
     }
 }

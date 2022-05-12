@@ -22,7 +22,7 @@ public class User {
     private String email;
     private String login;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", updatable = false, insertable = false)
     private List<Registration> registration;
 }

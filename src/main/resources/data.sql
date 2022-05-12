@@ -42,4 +42,3 @@ INSERT INTO REGISTRATION(id, user_id, lecture_id, created) VALUES (15, 6, 6, loc
 
 INSERT INTO REGISTRATION(id, user_id, lecture_id, created) VALUES (16, 7, 2, localtimestamp()-365);
 INSERT INTO REGISTRATION(id, user_id, lecture_id, created) VALUES (17, 7, 9, localtimestamp()-365);
-

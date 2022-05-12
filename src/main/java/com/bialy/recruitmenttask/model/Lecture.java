@@ -27,7 +27,7 @@ public class Lecture {
     private LocalDateTime ending;
     private final int max_amount_of_users = 5;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "lecture_id", updatable = false, insertable = false)
     private List<Registration> registrations;
 }
