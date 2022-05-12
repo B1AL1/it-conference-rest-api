@@ -69,6 +69,11 @@ public class UserService {
                         {
                             throw new IllegalArgumentException("Użytkownik jest już zapisany na tą prelekcję");
                         }
+                        Lecture lecture1 = lectureRepository.findById(registration1.getLecture_id()).orElseThrow();
+                        if(lecture1.getStarting().equals(lecture.getStarting()))
+                        {
+                            throw new IllegalArgumentException("Użytkownik jest już zapisany na inną prelekcję w tym samym czasie");
+                        }
                     });
 
                     newRegistration.setUser_id(exists.getId());
