@@ -42,6 +42,8 @@ public class UserService {
     public Registration registerUserToLecture(String login, String email, Registration registration) {
         List<Registration> ids = registrationRepository.findAllByLecture_id(registration.getLecture_id());
 
+        Lecture lecture = lectureRepository.findById(registration.getLecture_id()).orElseThrow();
+
         User user = new User();
         user.setLogin(login);
         user.setEmail(email);
@@ -51,7 +53,7 @@ public class UserService {
         newRegistration.setLecture_id(registration.getLecture_id());
         newRegistration.setCreated(registration.getCreated());
 
-        if(ids.stream().count()<5)
+        if(ids.stream().count()<lecture.getMax_amount_of_users())
         {
             if(!(exists == null))
             {
