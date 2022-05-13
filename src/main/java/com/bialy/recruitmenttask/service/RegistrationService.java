@@ -7,7 +7,9 @@ import com.bialy.recruitmenttask.repository.LectureRepository;
 import com.bialy.recruitmenttask.repository.RegistrationRepository;
 import com.bialy.recruitmenttask.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +29,7 @@ public class RegistrationService {
     public Registration registerUserToLecture(String login, String email, Registration registration) throws IOException {
         List<Registration> ids = registrationRepository.findAllByLecture_id(registration.getLecture_id());
 
-        Lecture lecture = lectureRepository.findById(registration.getLecture_id()).orElseThrow();
+        Lecture lecture = lectureRepository.findById(registration.getLecture_id()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Prelekcja o id: "+ registration.getLecture_id() +" nie istnieje"));
 
         User user = new User();
         user.setLogin(login);
@@ -38,14 +40,13 @@ public class RegistrationService {
         newRegistration.setLecture_id(registration.getLecture_id());
         newRegistration.setCreated(registration.getCreated());
 
-
         if(ids.stream().count()<lecture.getMax_amount_of_users())
         {
             if(!(exists == null))
             {
                 if(exists.getLogin().equals(login) && !exists.getEmail().equals(email))
                 {
-                    throw new IllegalStateException("Podany login jest już zajęty");
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Podany login jest już zajęty");
                 }
                 else
                 {
@@ -53,12 +54,12 @@ public class RegistrationService {
                     registrations.forEach(registration1 -> {
                         if(registration1.getLecture_id() == registration.getLecture_id())
                         {
-                            throw new IllegalArgumentException("Użytkownik jest już zapisany na tą prelekcję");
+                            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Użytkownik jest już zapisany na tą prelekcję");
                         }
-                        Lecture lecture1 = lectureRepository.findById(registration1.getLecture_id()).orElseThrow();
+                        Lecture lecture1 = lectureRepository.findById(registration1.getLecture_id()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Prelekcja o id: "+ registration1.getLecture_id() +" nie istnieje"));
                         if(lecture1.getStarting().equals(lecture.getStarting()))
                         {
-                            throw new IllegalArgumentException("Użytkownik jest już zapisany na inną prelekcję w tym samym czasie");
+                            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Użytkownik jest już zapisany na inną prelekcję w tym samym czasie");
                         }
                     });
                     newRegistration.setUser_id(exists.getId());
@@ -78,7 +79,7 @@ public class RegistrationService {
         }
         else
         {
-            throw new IllegalArgumentException("Brak miejsc na wykład");
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Brak miejsc na wykład");
         }
     }
 
@@ -88,7 +89,7 @@ public class RegistrationService {
 
         if(registration == null)
         {
-            throw new IllegalArgumentException("Użytkownik nie jest zapisany na tą prelekcje");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Użytkownik nie jest zapisany na tą prelekcje");
         }
         if(registration.getLecture_id() == lecture_id && registration.getUser_id() == user_id)
         {
@@ -109,7 +110,7 @@ public class RegistrationService {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Nie udało się zapisać powiadomienia do pliku");
         }
         writer.close();
     }

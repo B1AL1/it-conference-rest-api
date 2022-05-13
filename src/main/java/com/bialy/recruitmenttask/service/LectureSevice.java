@@ -2,11 +2,15 @@ package com.bialy.recruitmenttask.service;
 
 import com.bialy.recruitmenttask.model.Lecture;
 import com.bialy.recruitmenttask.model.Registration;
+import com.bialy.recruitmenttask.model.User;
 import com.bialy.recruitmenttask.repository.LectureRepository;
 import com.bialy.recruitmenttask.repository.RegistrationRepository;
+import com.bialy.recruitmenttask.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -14,6 +18,7 @@ import java.util.*;
 @AllArgsConstructor
 public class LectureSevice {
 
+    private final UserRepository userRepository;
     private final LectureRepository lectureRepository;
     private final RegistrationRepository registrationRepository;
 
@@ -22,7 +27,15 @@ public class LectureSevice {
     }
 
     public List<Lecture> getUserLectures(String login) {
-        return lectureRepository.findAllLecturesByUserLogin(login);
+        User user = userRepository.findUserByLogin(login);
+        if(user == null)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Użytkownik o loginie: "+ login +" nie istnieje");
+        }
+        else
+        {
+            return lectureRepository.findAllLecturesByUserLogin(login);
+        }
     }
 
     public Map<String, Object> getPercentageParticipationRate() {

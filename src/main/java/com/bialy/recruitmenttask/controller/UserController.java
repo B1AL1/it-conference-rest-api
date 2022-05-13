@@ -19,7 +19,6 @@ public class UserController {
     private final UserService userService;
     private final LectureSevice lectureSevice;
 
-
     @GetMapping("/{login}/lectures")
     public List<LectureDto> getUserLectures(@PathVariable String login){
         return mapToLecturesDto(lectureSevice.getUserLectures(login));
