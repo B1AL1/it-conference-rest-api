@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.bialy.recruitmenttask.controller.LectureDtoMapper.mapToLecturesDto;
 
@@ -24,12 +25,12 @@ public class LectureController {
     }
 
     @GetMapping("/statistic/all")
-    public List<Double> getPercentageParticipatationRate() {
+    public Map<String, Object> getPercentageParticipatationRate() {
         return lectureSevice.getPercentageParticipationRate();
     }
 
     @GetMapping("/statistic/path")
-    public List<Double> getPercentageParticipatationRateInPath() {
+    public Map<String, Object> getPercentageParticipatationRateInPath() {
         return lectureSevice.getPercentageParticipationRateInPath();
     }
 

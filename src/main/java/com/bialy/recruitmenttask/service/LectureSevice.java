@@ -5,11 +5,10 @@ import com.bialy.recruitmenttask.model.Registration;
 import com.bialy.recruitmenttask.repository.LectureRepository;
 import com.bialy.recruitmenttask.repository.RegistrationRepository;
 import lombok.AllArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -26,10 +25,10 @@ public class LectureSevice {
         return lectureRepository.findAllLecturesByUserLogin(login);
     }
 
-    public List<Double> getPercentageParticipationRate() {
+    public Map<String, Object> getPercentageParticipationRate() {
         List<Registration> registrations = registrationRepository.findAll();
         List<Lecture> lectures = getLectures();
-        List<Double> ratio = new ArrayList<>();
+        Map<Long, Double> ratio = new HashMap<>();
         List<Integer> accumulator = new ArrayList<>();
 
         lectures.forEach(lecture -> {
@@ -37,17 +36,19 @@ public class LectureSevice {
                 if(registration.getLecture_id() == lecture.getId())
                     accumulator.add(1);
             });
-            ratio.add( (double)accumulator.stream().count()/(double)lecture.getMax_amount_of_users());
+            ratio.put(lecture.getId(), (double)accumulator.stream().count()/(double)lecture.getMax_amount_of_users());
             accumulator.clear();
         });
-        return ratio;
+        JSONObject jsonObject = new JSONObject(ratio);
+
+        return jsonObject.toMap();
     }
 
-    public List<Double> getPercentageParticipationRateInPath() {
+    public Map<String, Object> getPercentageParticipationRateInPath() {
         List<Registration> registrations = registrationRepository.findAll();
         List<Lecture> lectures = getLectures();
         Set<Integer> paths = lectureRepository.findAllByThematic_path();
-        List<Double> ratio = new ArrayList<>();
+        Map<Integer, Double> ratio = new HashMap<>();
         List<Integer> accumulator = new ArrayList<>();
         List<Integer> divider = new ArrayList<>();
 
@@ -62,11 +63,12 @@ public class LectureSevice {
                     divider.add(1);
                 }
             });
-            ratio.add( (double)accumulator.stream().count()/(double)(divider.stream().count() * 5));
+            ratio.put(path, (double)accumulator.stream().count()/(double)(divider.stream().count() * 5));
             accumulator.clear();
             divider.clear();
         });
+        JSONObject jsonObject = new JSONObject(ratio);
 
-        return ratio;
+        return jsonObject.toMap();
     }
 }
