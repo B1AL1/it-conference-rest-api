@@ -22,7 +22,7 @@ You have to enable Lombom if the IDE ask you for that.
 ## Testing
 If the project launched without any problems go to site and test endpoints:
 
-<a href="http://localhost:8080/swagger-ui/index.html#/" target=blank>LINK</a>
+<a href="http://localhost:8080/swagger-ui/index.html#/" target="_blank">LINK</a>
 
 ## Features
 - User can view conference plan,
