@@ -7,15 +7,7 @@ REST API to handle IT conference written for needs of recruitment process.
 - IntelliJ IDEA 2021.3.3
 
 ## How to run project
-You have to clone the repository by running command:
-```
-git clone https://github.com/B1AL1/recruitment-task.git
-```
-or
-```
-git clone git@github.com:B1AL1/recruitment-task.git
-```
-
+You have to clone the repository.
 Then open project in IntelliJ IDEA and add configuration on main. After that build project.
 You have to enable Lombom if the IDE ask you for that.
 
