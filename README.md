@@ -1,4 +1,4 @@
-# Recruitment task
+# IT conference REST API
 ## Purpose of the project
 REST API to handle IT conference written for needs of recruitment process.
 
